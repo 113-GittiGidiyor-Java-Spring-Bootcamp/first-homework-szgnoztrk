@@ -1,4 +1,4 @@
-package dev.patika;
+package dev.patika.clients;
 
 public class Main {
     public static void main(String[] args) {
