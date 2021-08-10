@@ -1,4 +1,4 @@
-# GittiGidiyor-first-homework
+# GittiGidiyor-first-homework-Sezgin ÖZTÜRK
 
 ## UML diagram for the Homework
 
