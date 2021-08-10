@@ -17,7 +17,7 @@ public class CourseService implements CrudRepository<Course> {
 
     @Override
     public Course findById(int id) {
-        return em.createQuery("SELECT c FROM Course c WHERE c.id =: id", Course.class).getSingleResult();
+        return em.createQuery("SELECT c FROM Course c WHERE c.id =:courseId", Course.class).setParameter("courseId", id).getSingleResult();
     }
 
     @Override
@@ -35,6 +35,7 @@ public class CourseService implements CrudRepository<Course> {
         try {
             em.getTransaction().begin();
             em.remove(object);
+            em.getTransaction().commit();
         }catch (Exception ex){
             em.getTransaction().rollback();
         }
@@ -43,8 +44,11 @@ public class CourseService implements CrudRepository<Course> {
     @Override
     public void delete(int id) {
         Course course = this.findById(id);
-        if (course != null)
+        if (course != null){
+            em.getTransaction().begin();
             em.remove(course);
+            em.getTransaction().commit();
+        }
         else
             System.out.println("Id:{id}, Ders bulunamadı!");
     }

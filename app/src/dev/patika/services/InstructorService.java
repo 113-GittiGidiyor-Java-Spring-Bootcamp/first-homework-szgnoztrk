@@ -16,7 +16,7 @@ public class InstructorService implements CrudRepository<Instructor> {
 
     @Override
     public Instructor findById(int instructorId) {
-        return em.createQuery("SELECT i FROM Instructor i WHERE i.id =: instructorId", Instructor.class).getSingleResult();
+        return em.createQuery("SELECT i FROM Instructor i WHERE i.id =:instructorId", Instructor.class).setParameter("instructorId", instructorId).getSingleResult();
     }
 
     @Override
@@ -34,6 +34,7 @@ public class InstructorService implements CrudRepository<Instructor> {
         try {
             em.getTransaction().begin();
             em.remove(object);
+            em.getTransaction().commit();
         }catch (Exception ex){
             em.getTransaction().rollback();
         }
@@ -42,8 +43,11 @@ public class InstructorService implements CrudRepository<Instructor> {
     @Override
     public void delete(int id) {
         Instructor instructor = this.findById(id);
-        if (instructor != null)
+        if (instructor != null) {
+            em.getTransaction().begin();
             em.remove(instructor);
+            em.getTransaction().commit();
+        }
         else
             System.out.println("Id:{id}, Eğitmen bulunamadı!");
     }

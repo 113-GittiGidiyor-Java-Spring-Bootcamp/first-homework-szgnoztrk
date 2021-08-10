@@ -1,5 +1,6 @@
 package dev.patika.clients;
 
+import dev.patika.controllers.StudentsController;
 import dev.patika.models.*;
 import dev.patika.utils.EntityManagerUtils;
 
@@ -11,12 +12,30 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class Main {
-
     private static EntityManager em = EntityManagerUtils.getEntityManager("mysqlPU");
+    private static StudentsController studentsController = new StudentsController();
 
     public static void main(String[] args) {
         if(checkTestData() == 0)
             saveTestData();
+        //Student studentDb = new Student("Yağmur Azra", LocalDate.of(1999, Month.DECEMBER, 6), "Çan/Çanakkale", "Kadın");
+
+        //studentsController.save(studentDb);
+
+        //studentsController.delete(6);
+        //studentsController.delete(7);
+
+        List<Student> studentList = studentsController.getAll();
+
+        for (Student student: studentList) {
+            System.out.println(student.toString());
+            System.out.println("Courses =>");
+            List<Course> coursesByStudent = studentsController.getCoursesByStudent(student.getId());
+            for (Course course: coursesByStudent) {
+                System.out.println(course.toString());
+            }
+            System.out.println("");
+        }
     }
 
     private static int checkTestData() {
