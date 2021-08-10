@@ -45,7 +45,7 @@ public class StudentService implements CrudRepository<Student> {
         if (student != null)
             em.remove(student);
         else
-            System.out.println("Öğrenci bulunamadı!");
+            System.out.println("Id:{id}, Öğrenci bulunamadı!");
     }
 
     @Override

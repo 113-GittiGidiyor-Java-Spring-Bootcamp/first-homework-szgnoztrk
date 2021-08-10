@@ -1,0 +1,70 @@
+package dev.patika.services;
+
+import dev.patika.models.Instructor;
+import dev.patika.repository.CrudRepository;
+import dev.patika.utils.EntityManagerUtils;
+
+import javax.persistence.EntityManager;
+import java.util.List;
+
+public class InstructorService implements CrudRepository<Instructor> {
+    private EntityManager em = EntityManagerUtils.getEntityManager("mysqlPU");
+    @Override
+    public List<Instructor> findAll() {
+        return em.createQuery("SELECT i FROM Instructor i", Instructor.class).getResultList();
+    }
+
+    @Override
+    public Instructor findById(int instructorId) {
+        return em.createQuery("SELECT i FROM Instructor i WHERE i.id =: instructorId", Instructor.class).getSingleResult();
+    }
+
+    @Override
+    public void save(Instructor object) {
+        try {
+            em.getTransaction().begin();
+            em.persist(object);
+        }catch (Exception ex){
+            em.getTransaction().rollback();
+        }
+    }
+
+    @Override
+    public void delete(Instructor object) {
+        try {
+            em.getTransaction().begin();
+            em.remove(object);
+        }catch (Exception ex){
+            em.getTransaction().rollback();
+        }
+    }
+
+    @Override
+    public void delete(int id) {
+        Instructor instructor = this.findById(id);
+        if (instructor != null)
+            em.remove(instructor);
+        else
+            System.out.println("Id:{id}, Eğitmen bulunamadı!");
+    }
+
+    @Override
+    public void update(Instructor object, int id) {
+        Instructor instructor = this.findById(id);
+        if (instructor != null) {
+            try{
+                em.getTransaction().begin();
+
+                instructor.setFullName(object.getFullName());
+                instructor.setAddress(object.getAddress());
+                instructor.setPhoneNumber(object.getPhoneNumber());
+                instructor.setCourses(object.getCourses());
+
+                em.merge(instructor);
+                em.getTransaction().commit();
+            }catch (Exception ex){
+                em.getTransaction().rollback();
+            }
+        }
+    }
+}
