@@ -1,6 +1,7 @@
 package dev.patika.models;
 
 import javax.persistence.*;
+import java.time.LocalDate;
 import java.util.Date;
 import java.util.List;
 import java.util.Objects;
@@ -17,7 +18,7 @@ public class Student {
     private String fullName;
 
     @Column(name = "student_birthdate")
-    private Date birthDate;
+    private LocalDate birthDate;
 
     @Column(name = "student_address")
     private String address;
@@ -28,7 +29,7 @@ public class Student {
     @OneToMany(mappedBy = "student")
     private List<Course> courses;
 
-    public Student(String fullName, Date birthDate, String address, String gender) {
+    public Student(String fullName, LocalDate birthDate, String address, String gender) {
         this.fullName = fullName;
         this.birthDate = birthDate;
         this.address = address;
@@ -53,11 +54,11 @@ public class Student {
         this.fullName = fullName;
     }
 
-    public Date getBirthDate() {
+    public LocalDate getBirthDate() {
         return birthDate;
     }
 
-    public void setBirthDate(Date birthDate) {
+    public void setBirthDate(LocalDate birthDate) {
         this.birthDate = birthDate;
     }
 

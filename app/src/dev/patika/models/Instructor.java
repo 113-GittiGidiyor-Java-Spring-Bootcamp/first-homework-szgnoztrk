@@ -23,7 +23,7 @@ public class Instructor {
     private String phoneNumber;
 
     @OneToMany
-    List<Course> courses;
+    private List<Course> courses;
 
     public Instructor(String fullName, String address, String phoneNumber) {
         this.fullName = fullName;

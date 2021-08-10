@@ -15,7 +15,7 @@ public class Course {
     private String name;
 
     @Column(name = "course_code")
-    private int code;
+    private String code;
 
     @Column(name = "course_credit_score")
     private int creditScore;
@@ -26,7 +26,7 @@ public class Course {
     @ManyToOne
     Instructor instructor;
 
-    public Course(String name, int code, int creditScore) {
+    public Course(String name, String code, int creditScore) {
         this.name = name;
         this.code = code;
         this.creditScore = creditScore;
@@ -50,11 +50,11 @@ public class Course {
         this.name = name;
     }
 
-    public int getCode() {
+    public String getCode() {
         return code;
     }
 
-    public void setCode(int code) {
+    public void setCode(String code) {
         this.code = code;
     }
 

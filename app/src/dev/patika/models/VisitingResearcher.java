@@ -6,19 +6,19 @@ import javax.persistence.*;
 @Table(name = "visiting_researchers")
 public class VisitingResearcher extends Instructor{
     @Column(name = "vr_hourly_salary")
-    private int hourlySalary;
+    private double hourlySalary;
 
-    public VisitingResearcher(String fullName, String address, String phoneNumber, int hourlySalary) {
+    public VisitingResearcher(String fullName, String address, String phoneNumber, double hourlySalary) {
         super(fullName, address, phoneNumber);
         this.hourlySalary = hourlySalary;
     }
     public VisitingResearcher(){}
 
-    public int getHourlySalary() {
+    public double getHourlySalary() {
         return hourlySalary;
     }
 
-    public void setHourlySalary(int hourlySalary) {
+    public void setHourlySalary(double hourlySalary) {
         this.hourlySalary = hourlySalary;
     }
 }
