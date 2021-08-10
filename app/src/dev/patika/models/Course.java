@@ -1,6 +1,7 @@
 package dev.patika.models;
 
 import javax.persistence.*;
+import java.util.List;
 import java.util.Objects;
 
 @Entity
@@ -20,8 +21,8 @@ public class Course {
     @Column(name = "course_credit_score")
     private int creditScore;
 
-    @ManyToOne
-    Student student;
+    @ManyToMany(mappedBy = "courses")
+    List<Student> students;
 
     @ManyToOne
     Instructor instructor;
@@ -66,12 +67,12 @@ public class Course {
         this.creditScore = creditScore;
     }
 
-    public Student getStudent() {
-        return student;
+    public List<Student> getStudents() {
+        return students;
     }
 
-    public void setStudent(Student student) {
-        this.student = student;
+    public void setStudents(List<Student> students) {
+        this.students = students;
     }
 
     public Instructor getInstructor() {

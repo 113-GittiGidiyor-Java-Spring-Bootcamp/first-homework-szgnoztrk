@@ -26,7 +26,7 @@ public class Student {
     @Column(name = "student_gender")
     private String gender;
 
-    @OneToMany(mappedBy = "student")
+    @ManyToMany
     private List<Course> courses;
 
     public Student(String fullName, LocalDate birthDate, String address, String gender) {

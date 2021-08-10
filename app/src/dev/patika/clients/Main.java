@@ -1,15 +1,14 @@
 package dev.patika.clients;
 
-import dev.patika.models.Course;
-import dev.patika.models.Instructor;
-import dev.patika.models.Student;
-import dev.patika.models.VisitingResearcher;
+import dev.patika.models.*;
 import dev.patika.utils.EntityManagerUtils;
 
 import javax.persistence.EntityManager;
 import java.sql.SQLException;
 import java.time.LocalDate;
 import java.time.Month;
+import java.util.ArrayList;
+import java.util.List;
 
 public class Main {
 
@@ -35,20 +34,32 @@ public class Main {
         Course course3 = new Course("Java Programlama", "BM345", 5);
 
         Instructor instructor1 = new VisitingResearcher("Koray Güney", "İstanbul", "+905554443322", 150);
-        Instructor instructor2 = new VisitingResearcher("Abdullah Talha Kabakuş", "Sakarya", "+906664443322", 120);
+        Instructor instructor2 = new PermanentInstructor("Abdullah Talha Kabakuş", "Sakarya", "+906664443322", 9000);
         Instructor instructor3 = new VisitingResearcher("Resul Kara", "Düzce", "+905559993322", 200);
 
-        student1.getCourses().add(course1);
-        student1.getCourses().add(course2);
-        student1.getCourses().add(course3);
-        student2.getCourses().add(course2);
-        student2.getCourses().add(course3);
-        student3.getCourses().add(course1);
-        student4.getCourses().add(course3);
+        List<Course> student1Courses = new ArrayList<>();
+        student1Courses.add(course1);
+        student1Courses.add(course2);
+        student1Courses.add(course3);
+        student1.setCourses(student1Courses);
 
-        instructor1.getCourses().add(course3);
-        instructor2.getCourses().add(course1);
-        instructor3.getCourses().add(course2);
+        List<Course> student2Courses = new ArrayList<>();
+        student2Courses.add(course3);
+        student2.setCourses(student2Courses);
+
+        List<Course> student3Courses = new ArrayList<>();
+        student3Courses.add(course1);
+        student3Courses.add(course2);
+        student3.setCourses(student3Courses);
+
+        List<Course> student4Courses = new ArrayList<>();
+        student4Courses.add(course1);
+        student4Courses.add(course3);
+        student4.setCourses(student4Courses);
+
+        course1.setInstructor(instructor2);
+        course2.setInstructor(instructor3);
+        course3.setInstructor(instructor1);
 
         try {
             em.getTransaction().begin();

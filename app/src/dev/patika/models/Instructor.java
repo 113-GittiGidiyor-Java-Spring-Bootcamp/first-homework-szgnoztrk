@@ -22,7 +22,7 @@ public class Instructor {
     @Column(name = "instructor_phone")
     private String phoneNumber;
 
-    @OneToMany
+    @OneToMany(mappedBy = "instructor")
     private List<Course> courses;
 
     public Instructor(String fullName, String address, String phoneNumber) {
