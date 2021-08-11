@@ -41,7 +41,11 @@ public class StudentService implements CrudRepository<Student>, StudentRepositor
             em.getTransaction().rollback();
         }
     }
-
+    
+    /*
+        Override edilen delete metoduna int tipinde id göndererek ilgili satırı bulursa
+        o object üzerinden silme işlemini gerçekleştirecektir.
+     */
     @Override
     public void delete(int id) {
         Student student = this.findById(id);

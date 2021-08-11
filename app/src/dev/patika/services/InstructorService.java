@@ -40,6 +40,10 @@ public class InstructorService implements CrudRepository<Instructor> {
         }
     }
 
+    /*
+        Override edilen delete metoduna int tipinde id göndererek ilgili satırı bulursa
+        o object üzerinden silme işlemini gerçekleştirecektir.
+     */
     @Override
     public void delete(int id) {
         Instructor instructor = this.findById(id);
